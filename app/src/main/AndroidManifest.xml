@@ -13,6 +13,14 @@
         android:theme="@style/Theme.GeneraQR"
         tools:targetApi="31">
         <activity
+            android:name=".ResetPassword"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".Singnup"
+            android:exported="false"
+            android:launchMode="singleInstance" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:launchMode="singleInstance" />

@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Singnup">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/kayle_logo" />
+                app:srcCompat="@drawable/registro" />
 
         </LinearLayout>
 
@@ -38,7 +41,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/edtTxtEmail"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -48,7 +51,7 @@
                 android:textSize="30sp" />
 
             <EditText
-                android:id="@+id/edtTxtPassword"
+                android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -56,33 +59,35 @@
                 android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:textSize="30sp" />
+            <EditText
+                android:id="@+id/txtConfPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/signup_textConfPassword"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnSign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="@string/login_btnlogin"
-                android:textSize="30sp"
+                android:text="@string/signup_btnRegistrar"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btnPassword"
+                android:id="@+id/btnRegresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:text="@string/login_btnfpass"
-                android:textColor="#673AB7"
-                android:textSize="24sp" />
+                android:backgroundTint="#E91E63"
+                android:text="@string/regresar"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnRegistrarse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:text="@string/login_btnsignup"
-                android:textColor="#673AB7"
-                android:textSize="24sp" />
+
         </LinearLayout>
 
     </LinearLayout>

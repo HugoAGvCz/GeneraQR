@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">GeneraQR</string>
+    <string name="regresar">Regresar</string>
     <string name="login_btnlogin">Iniciar sesión</string>
     <string name="login_btnfpass">¿Olvidaste tu contraseña?</string>
-    <string name="login_btnsignup">Registrarse</string>
+    <string name="login_btnsignup">Crear cuenta</string>
     <string name="login_txtemail">Correo</string>
     <string name="login_txtpass">Contraseña</string>
+    <string name="signup_btnRegistrar">Registrarte</string>
+    <string name="signup_textConfPassword">Confirma tu contraseña</string>
 </resources>
