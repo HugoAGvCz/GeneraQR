@@ -32,6 +32,10 @@ class Singnup : AppCompatActivity() {
                     task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Usuario creado!", Toast.LENGTH_LONG).show()
+                        email.setText("")
+                        password.setText("")
+                        confPassword.setText("")
+                        auth.signOut()
                     } else {
                         if (task.exception is FirebaseAuthUserCollisionException) {
                             Toast.makeText(this, "Este correo ya fue registrado!", Toast.LENGTH_LONG).show()
@@ -44,28 +48,30 @@ class Singnup : AppCompatActivity() {
         }
 
         btnRegresar.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            val intent = Intent(this, Login::class.java)
+            intent.putExtra("FROM_SIGNUP", true)
+            startActivity(intent)
         }
     }
 
     private fun revisarCampos(email: String, password: String, confPassword: String): Boolean {
-        if (email == "") {
-            Toast.makeText(this, "El campo correo es requerido", Toast.LENGTH_LONG).show()
-            return false
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "El correo no es válido", Toast.LENGTH_LONG).show()
-            return false
-        }
+            if (email == "") {
+                Toast.makeText(this, "El campo correo es requerido", Toast.LENGTH_LONG).show()
+                return false
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "El correo no es válido", Toast.LENGTH_LONG).show()
+                return false
+            }
 
-        if (password == "") {
-            Toast.makeText(this, "El campo contraseña es requerido", Toast.LENGTH_LONG).show()
-            return false
-        }
-        if (password.length < 6) {
-            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_LONG).show()
-            return false
-        }
+            if (password == "") {
+                Toast.makeText(this, "El campo contraseña es requerido", Toast.LENGTH_LONG).show()
+                return false
+            }
+            if (password.length < 6) {
+                Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_LONG).show()
+                return false
+            }
         if (confPassword == "") {
             Toast.makeText(this, "El campo confirma tu contraseña es requerido", Toast.LENGTH_LONG).show()
             return false
