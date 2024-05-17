@@ -165,7 +165,6 @@ class GeneraQR : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.perfil -> true
             R.id.logout -> {
                 auth.signOut()
                 startActivity(Intent(this, Login::class.java))
