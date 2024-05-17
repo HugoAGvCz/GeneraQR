@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".Login">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,10 +28,9 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Iniciar sesión"
+                android:contentDescription="@string/login_btnlogin"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/kayle_logo" />
-
+                app:srcCompat="@drawable/poro_engineer" />
         </LinearLayout>
 
         <LinearLayout

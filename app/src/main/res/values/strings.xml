@@ -11,4 +11,6 @@
     <string name="main_toolbar">GeneraQR</string>
     <string name="main_toolbar_menu_perfil">Mi perfil</string>
     <string name="main_toolbar_menu_signout">Cerrar sesión</string>
+    <string name="generarQR_txt">Codigo</string>
+    <string name="generarQR_btn">Generar QR</string>
 </resources>
