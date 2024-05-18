@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GeneraQR</string>
+    <string name="app_name">GenerarQR</string>
     <string name="regresar">Regresar</string>
     <string name="login_btnlogin">Iniciar sesión</string>
     <string name="login_btnfpass">¿Olvidaste tu contraseña?</string>

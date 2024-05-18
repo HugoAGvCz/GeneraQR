@@ -44,15 +44,31 @@ class GeneraQR : AppCompatActivity() {
         imgCodigoQR = findViewById<ImageView>(R.id.codigoQR)
         var btnGenerar = findViewById<Button>(R.id.btnGenerar)
 
+        val savedQRCode = sharedPreferences.getString("savedQRCode", null)
+        if (savedQRCode != null) {
+            codigosQRRef.whereEqualTo("codigo", savedQRCode).get().addOnSuccessListener { documents ->
+                if (documents.documents.isNotEmpty()) {
+                    val document = documents.documents[0]
+                    if (document.getString("status") == "Generado") {
+                        valCodigoQR = savedQRCode
+                        docId = document.id
+                        generarCodigoQR()
+                    }
+                }
+            }
+        }
+
         btnGenerar.setOnClickListener {
-            docId?.let {
-                codigosQRRef.document(it).get().addOnSuccessListener { document ->
+            if (docId != null) {
+                codigosQRRef.document(docId!!).get().addOnSuccessListener { document ->
                     if (document.getString("status") == "Utilizado") {
                         buscandoCodigoQR()
                     } else {
                         Toast.makeText(this, "Ya existe un código QR generado. Debe ser utilizado para generar otro.", Toast.LENGTH_SHORT).show()
                     }
                 }
+            } else {
+                buscandoCodigoQR()
             }
         }
 
@@ -62,27 +78,33 @@ class GeneraQR : AppCompatActivity() {
     }
 
     private fun buscandoCodigoQR() {
-        codigosQRRef.get().addOnSuccessListener { documents ->
-            var sinGenerar = false
-            for (document in documents) {
-                if (document.getString("status") == "Sin generar") {
-                    valCodigoQR = document.getString("codigo")
-                    docId = document.id
-                    document.reference.update("status", "Generado")
-                    sinGenerar = true
-                    break
+        codigosQRRef.whereEqualTo("status", "Generado").get().addOnSuccessListener { documents ->
+            if (documents.documents.isNotEmpty()) {
+                Toast.makeText(this, "Ya existe un código QR generado. Debe ser utilizado para generar otro.", Toast.LENGTH_SHORT).show()
+            } else {
+                codigosQRRef.get().addOnSuccessListener { documents ->
+                    var sinGenerar = false
+                    for (document in documents) {
+                        if (document.getString("status") == "Sin generar") {
+                            valCodigoQR = document.getString("codigo")
+                            docId = document.id
+                            document.reference.update("status", "Generado")
+                            sinGenerar = true
+                            break
+                        }
+                    }
+                    if (!sinGenerar) {
+                        Toast.makeText(this, "Todos los códigos han sido utilizados, favor de esperar uno nuevo.", Toast.LENGTH_LONG).show()
+                    } else if (valCodigoQR == null) {
+                        Toast.makeText(this, "No hay códigos disponibles, favor de esperar uno nuevo.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        generarCodigoQR()
+                        buscandoCambiosdeStatus()
+                    }
+                }.addOnFailureListener { exception ->
+                    Log.w(ContentValues.TAG, "Error obteniendo documentos: ", exception)
                 }
             }
-            if (!sinGenerar) {
-                Toast.makeText(this, "Todos los códigos han sido utilizados, favor de esperar uno nuevo.", Toast.LENGTH_LONG).show()
-            } else if (valCodigoQR == null) {
-                Toast.makeText(this, "No hay códigos disponibles, favor de esperar uno nuevo.", Toast.LENGTH_SHORT).show()
-            } else {
-                generarCodigoQR()
-                buscandoCambiosdeStatus()
-            }
-        }.addOnFailureListener { exception ->
-            Log.w(ContentValues.TAG, "Error obteniendo documentos: ", exception)
         }
     }
 
@@ -141,8 +163,8 @@ class GeneraQR : AppCompatActivity() {
 
             if (snapshots != null && !snapshots.isEmpty) {
                 for (documentChange in snapshots.documentChanges) {
-                    if (documentChange.type == DocumentChange.Type.ADDED) {
-                        buscandoCodigoQR()
+                    if (documentChange.type == DocumentChange.Type.ADDED && documentChange.document.getString("status") == "Sin generar") {
+                        Toast.makeText(this, "Se ha agregado un nuevo código QR. Puede generar uno nuevo presionando el botón.", Toast.LENGTH_LONG).show()
                         break
                     }
                 }
