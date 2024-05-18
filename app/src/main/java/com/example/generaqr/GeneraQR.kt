@@ -43,24 +43,22 @@ class GeneraQR : AppCompatActivity() {
         var toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         imgCodigoQR = findViewById<ImageView>(R.id.codigoQR)
         var btnGenerar = findViewById<Button>(R.id.btnGenerar)
-        val savedQRCode = sharedPreferences.getString("savedQRCode", null)
-        if (savedQRCode != null) {
-            valCodigoQR = savedQRCode
-            generarCodigoQR()
-        } else {
-            buscandoCodigoQR()
-        }
 
         btnGenerar.setOnClickListener {
-            if (valCodigoQR != null) {
-                Toast.makeText(this, "El codigo QR debe ser utilizado y debe haber códigos disponibles para generar otro.", Toast.LENGTH_SHORT).show()
-            } else {
-                buscandoCodigoQR()
+            docId?.let {
+                codigosQRRef.document(it).get().addOnSuccessListener { document ->
+                    if (document.getString("status") == "Utilizado") {
+                        buscandoCodigoQR()
+                    } else {
+                        Toast.makeText(this, "Ya existe un código QR generado. Debe ser utilizado para generar otro.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
         setSupportActionBar(toolbar)
         buscandoNuevosCodigos()
+
     }
 
     private fun buscandoCodigoQR() {
@@ -101,6 +99,7 @@ class GeneraQR : AppCompatActivity() {
             imgCodigoQR.setImageBitmap(bitmap)
             Toast.makeText(this, "Código QR generado. Debe ser utilizado para generar otro.", Toast.LENGTH_SHORT).show()
 
+            // Guardar el código QR en las preferencias compartidas
             val editor = sharedPreferences.edit()
             editor.putString("savedQRCode", valCodigoQR)
             editor.apply()
@@ -120,14 +119,11 @@ class GeneraQR : AppCompatActivity() {
                 if (snapshot != null && snapshot.exists()) {
                     if (snapshot.getString("status") == "Utilizado") {
                         valCodigoQR = null
-                        Toast.makeText(this, "El código QR ha sido utilizado. Buscando uno nuevo...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "El código QR ha sido utilizado. Puede generar uno nuevo presionando el botón.", Toast.LENGTH_LONG).show()
 
-                        // Borrar el código QR de las preferencias compartidas
                         val editor = sharedPreferences.edit()
                         editor.remove("savedQRCode")
                         editor.apply()
-
-                        buscandoCodigoQR()
                     }
                 } else {
                     Log.d(ContentValues.TAG, "Current data: null")
