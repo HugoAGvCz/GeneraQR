@@ -101,7 +101,6 @@ class GeneraQR : AppCompatActivity() {
             imgCodigoQR.setImageBitmap(bitmap)
             Toast.makeText(this, "Código QR generado. Debe ser utilizado para generar otro.", Toast.LENGTH_SHORT).show()
 
-            // Guardar el código QR en las preferencias compartidas
             val editor = sharedPreferences.edit()
             editor.putString("savedQRCode", valCodigoQR)
             editor.apply()

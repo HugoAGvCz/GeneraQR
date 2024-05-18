@@ -8,7 +8,7 @@
     <string name="login_txtpass">Contraseña</string>
     <string name="signup_btnRegistrar">Registrarte</string>
     <string name="signup_textConfPassword">Confirma tu contraseña</string>
-    <string name="main_toolbar">GeneraQR</string>
+    <string name="main_toolbar">Genera QR</string>
     <string name="main_toolbar_menu_perfil">Mi perfil</string>
     <string name="main_toolbar_menu_signout">Cerrar sesión</string>
     <string name="generarQR_txt">Codigo</string>
