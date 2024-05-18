@@ -48,7 +48,7 @@
                 android:hint="@string/login_txtemail"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                android:textSize="30sp" />
+                android:textSize="28sp" />
 
             <EditText
                 android:id="@+id/txtPassword"
@@ -58,7 +58,8 @@
                 android:hint="@string/login_txtpass"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:textSize="30sp" />
+                android:textSize="28sp" />
+
             <EditText
                 android:id="@+id/txtConfPassword"
                 android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 android:hint="@string/signup_textConfPassword"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:textSize="30sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/btnSign"
