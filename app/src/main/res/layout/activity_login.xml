@@ -64,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
+                android:textColor="@color/white"
                 android:text="@string/login_btnlogin"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
                 android:text="@string/login_btnfpass"
-                android:textColor="#673AB7"
+                android:textColor="?attr/colorAccent"
                 android:textSize="24sp" />
 
             <Button
@@ -83,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
                 android:text="@string/login_btnsignup"
-                android:textColor="#673AB7"
+                android:textColor="?attr/colorAccent"
                 android:textSize="24sp" />
         </LinearLayout>
 

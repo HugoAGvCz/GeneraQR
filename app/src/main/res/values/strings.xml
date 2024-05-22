@@ -6,6 +6,8 @@
     <string name="login_btnsignup">Crear cuenta</string>
     <string name="login_txtemail">Correo</string>
     <string name="login_txtpass">Contraseña</string>
+    <string name="resetPassword_txtCorreo">Correo del usuario</string>
+    <string name="resetPassword_btnReset">Restablecer la contraseña</string>
     <string name="signup_btnRegistrar">Registrarte</string>
     <string name="signup_textConfPassword">Confirma tu contraseña</string>
     <string name="main_toolbar">Genera QR</string>
