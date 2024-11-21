@@ -30,7 +30,8 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/login_btnlogin"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/poro" />
+                android:background="#FFFFFF"
+                app:srcCompat="@drawable/generaqr" />
         </LinearLayout>
 
         <LinearLayout
